@@ -1,4 +1,5 @@
-﻿using HotelProject.WebUI.Dtos.BookingDto;
+﻿using HotelProject.EntityLayer.Concrete;
+using HotelProject.WebUI.Dtos.BookingDto;
 using HotelProject.WebUI.Dtos.SubscribeDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HotelProject.WebUI.Controllers
 {
-    public class BookingController : Controller
+    public class BookingController : Controller 
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
@@ -34,7 +35,7 @@ namespace HotelProject.WebUI.Controllers
             var jsonData = JsonConvert.SerializeObject(createBookingDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             await client.PostAsync("http://localhost:40699/api/Booking", stringContent);
-            return RedirectToAction("Index", "Booking");
+            return RedirectToAction("Index", "Default");
         }
     }
 }

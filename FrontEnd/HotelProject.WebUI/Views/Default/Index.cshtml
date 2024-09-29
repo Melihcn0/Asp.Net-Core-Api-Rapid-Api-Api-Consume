@@ -4,56 +4,48 @@
 }
 <!DOCTYPE html>
 <html lang="en">
+
 @await Component.InvokeAsync("_HeadPartial")
 <body>
+
     <div class="container-xxl bg-white p-0">
-        <!-- Spinner Start -->
         @await Component.InvokeAsync("_SpinnerPartial")
-        <!-- Spinner End -->
-        <!-- Header Start -->
+
         @await Component.InvokeAsync("_NavbarPartial")
-        <!-- Header End -->
+
         @await Component.InvokeAsync("_SliderPartial")
-        <!-- Carousel Start -->
+        <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container">
+                <div class="bg-White" style="padding: 20px;">
+                    <div class="row g-2">
+                        <div class="col-md-10">
+                            <div class="row g-2">
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <!-- Carousel End -->
         @await Component.InvokeAsync("_AboutUsPartial")
-        <!-- Booking Start -->
-        @await Component.InvokeAsync("_ReservationPartial")
-        <!-- Booking End -->
 
-        <!-- About Start -->
         @await Component.InvokeAsync("_TrailerPartial")
-        <!-- About End -->
-        <!-- Room Start -->
-        @await Component.InvokeAsync("_ServicePartial")
-        <!-- Room End -->
-        <!-- Video Start -->
+
+        @await Component.InvokeAsync("_RoomsPartial")
+
         @await Component.InvokeAsync("_TestimonialPartial")
-        <!-- Video Start -->
-        <!-- Service Start -->
+
         @await Component.InvokeAsync("_TeamPartial")
 
-        <!-- Service End -->
-        <!-- Testimonial Start -->
 
-        <!-- Testimonial End -->
-        <!-- Team Start -->
-
-        <!-- Team End -->
-        <!-- Newsletter Start -->
-        @await Html.PartialAsync("/Views/Booking/AddBooking.cshtml")
         @await Html.PartialAsync("/Views/Default/_SubscribePartial.cshtml")
-        <!-- Newsletter Start -->
-        <!-- Footer Start -->
+
         @await Component.InvokeAsync("_FooterPartial")
-        <!-- Footer End -->
-        <!-- Back to Top -->
+
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
-    <!-- JavaScript Libraries -->
-    <!-- Template Javascript -->
     @await Component.InvokeAsync("_ScriptsPartial")
+
 </body>
 </html>
