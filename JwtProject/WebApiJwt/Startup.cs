@@ -38,6 +38,7 @@ namespace WebApiJwt
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("aspnetcoreapiapi")),
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = true,
+                    ClockSkew=TimeSpan.Zero,
                 };
             }
             );
@@ -57,6 +58,7 @@ namespace WebApiJwt
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiJwt v1"));
             }
+            app.UseAuthentication();
 
             app.UseRouting();
 
