@@ -29,19 +29,19 @@
     <!--*******************
         Preloader end
     ********************-->
- 
+
 
 
 
     <div class="login-form-bg h-100">
         <div class="container h-100">
-            <div class="row justify-content-center align-items-center h-100">
+            <div class="d-flex justify-content-center align-items-center" style="height: 100vh; flex-direction: column;">
                 <div class="col-xl-6">
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
                                 <a class="text-center" href="index.html"> <h4>Otel Giriş Paneli</h4></a>
-                                <form>
+                                <form class="mt-5 mb-5 login-input" asp-action="Index" method="post">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Kullanıcı adınız" asp-for="username">
                                     <span asp-validation-for="username" class="text-danger"></span>
@@ -50,7 +50,7 @@
                                         <input type="password" class="form-control" placeholder="Şifreniz" asp-for="password">
                                         <span asp-validation-for="password" class="text-danger"></span>
                                     </div>
-                                    <button class="btn login-form__btn submit w-100">Giriş yapl</button>
+                                     <button class="btn login-form__btn submit w-100">Giriş yap</button>
                                 </form>
                                 <p class="mt-5 login-form__footer">Hesabın Yok mu? <a href="/Register/Index/" class="text-primary">Kayıt ol</a></p>
                             </div>
@@ -60,6 +60,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 

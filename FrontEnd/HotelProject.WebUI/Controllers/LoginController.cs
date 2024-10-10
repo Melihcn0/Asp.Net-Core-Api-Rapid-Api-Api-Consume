@@ -30,6 +30,7 @@ namespace HotelProject.WebUI.Controllers
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Staff");
+
                 }
                 else
                 {
