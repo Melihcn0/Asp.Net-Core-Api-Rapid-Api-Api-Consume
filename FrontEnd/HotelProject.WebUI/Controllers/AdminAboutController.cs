@@ -25,7 +25,7 @@ namespace HotelProject.WebUI.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsondata = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<UpdateAboutDto>>(jsondata);
+                var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(jsondata);
                 return View(values);
             }
             return View();
@@ -44,7 +44,7 @@ namespace HotelProject.WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateAbout(UpdateStaffViewModel model)
+        public async Task<IActionResult> UpdateAbout(UpdateAboutDto model)
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(model);
