@@ -4,7 +4,6 @@
     Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
 }
 
-                <div class="card-body">
                     <div class="email-left-box">
                 <a href="/AdminContact/AddSendMessage/" class="btn btn-primary btn-block">Yeni mesaj oluştur</a>
                 @await Html.PartialAsync("SideBarAdminContactPartial")
@@ -23,7 +22,7 @@
                             @foreach(var item in Model)
                             {
                         <div class="message">
-                            <a href="email-read.html">
+                        <a href="/AdminContact/MessageDetailsByInbox/@item.ContactID">
                                 <div class="col-mail col-mail-1">
                                     <div class="email-checkbox">
                                         <input type="checkbox" id="chk2">
@@ -31,7 +30,7 @@
                                     </div><span class="star-toggle ti-star"></span>
                                 </div>
                                 <div class="col-mail col-mail-2">
-                                    <div class="Subject">@item.Message.Substring(0, 60)</div>
+                                    <div class="Subject">@item.Message.Substring(0, 100)</div>
                                     <div class="date">@item.Date.ToShortDateString()</div>
                                 </div>
                             </a>
