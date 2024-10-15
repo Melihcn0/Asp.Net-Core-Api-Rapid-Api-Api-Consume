@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace HotelProject.WebUI.Controllers
     public class AdminContactController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private dynamic jsonData;
 
         public AdminContactController(IHttpClientFactory httpClientFactory)
         {
@@ -25,22 +27,49 @@ namespace HotelProject.WebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:40699/api/Contact");
+
+            var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client2.GetAsync("http://localhost:40699/api/Contact/GetContactCount");
+
+            var client3 = _httpClientFactory.CreateClient();
+            var responseMessage3 = await client3.GetAsync("http://localhost:40699/api/SendMessage/GetSendMessageCount");
+
             if (responseMessage.IsSuccessStatusCode);
             {
                 var jsondata = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<InboxContactDto>>(jsondata);
+
+                var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+                ViewBag.ContactCount = jsonData2;
+
+                var jsonData3 = await responseMessage3.Content.ReadAsStringAsync();
+                ViewBag.SendMessageCount = jsonData3;
                 return View(values);
             }
+            return View();
         }
 
         public async Task<IActionResult> Sendbox()
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:40699/api/SendMessage");
+
+            var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client2.GetAsync("http://localhost:40699/api/Contact/GetContactCount");
+
+            var client3 = _httpClientFactory.CreateClient();
+            var responseMessage3 = await client3.GetAsync("http://localhost:40699/api/SendMessage/GetSendMessageCount");
             if (responseMessage.IsSuccessStatusCode) ;
             {
                 var jsondata = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultSendBoxDto>>(jsondata);
+
+                var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+                ViewBag.ContactCount = jsonData2;
+
+                var jsonData3 = await responseMessage3.Content.ReadAsStringAsync();
+                ViewBag.SendMessageCount = jsonData3;
+
                 return View(values);
             }
         }

@@ -28,6 +28,11 @@ namespace HotelProject.BusinessLayer.Concrete
             return _contactDal.GetByID(id);
         }
 
+        public int TGetContactCount()
+        {
+            return _contactDal.GetContactCount();
+        }
+
         public List<Contact> TGetList()
         {
            return _contactDal.TGetList();
@@ -40,7 +45,7 @@ namespace HotelProject.BusinessLayer.Concrete
 
         public void TUpdate(Contact t)
         {
-            throw new NotImplementedException();
+            _contactDal.TUpdate(t);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using HotelProject.BusinessLayer.Abstract;
 using HotelProject.DataAccessLayer.Abstract;
+using HotelProject.DataAccessLayer.EntityFramework;
 using HotelProject.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,11 @@ namespace HotelProject.BusinessLayer.Concrete
         public List<SendMessage> TGetList()
         {
             return _sendMessageDal.TGetList();
+        }
+
+        public int TGetSendMessageCount()
+        {
+            return _sendMessageDal.GetSendMessageCount();
         }
 
         public void TInsert(SendMessage t)
