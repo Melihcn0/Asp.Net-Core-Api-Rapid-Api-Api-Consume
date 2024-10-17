@@ -1,6 +1,7 @@
 ﻿using HotelProject.BusinessLayer.Abstract;
 using HotelProject.DataAccessLayer.Abstract;
 using HotelProject.DataAccessLayer.Concrete;
+using HotelProject.DataAccessLayer.EntityFramework;
 using HotelProject.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,11 @@ namespace HotelProject.BusinessLayer.Concrete
         public void TDelete(AppUser t)
         {
             throw new NotImplementedException();
+        }
+
+        public int TGetAppUserCount()
+        {
+            return _appUserDal.GetAppUserCount();
         }
 
         public AppUser TGetByID(int id)

@@ -44,6 +44,11 @@ namespace HotelProject.BusinessLayer.Concrete
             _staffDal.TInsert(t);
         }
 
+        public List<Staff> TLastFourStaff()
+        {
+            return _staffDal.LastFourStaff();
+        }
+
         public void TUpdate(Staff t)
         {
             _staffDal.TUpdate(t);

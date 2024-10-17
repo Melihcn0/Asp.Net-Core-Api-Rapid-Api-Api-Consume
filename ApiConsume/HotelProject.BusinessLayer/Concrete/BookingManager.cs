@@ -1,5 +1,6 @@
 ﻿using HotelProject.BusinessLayer.Abstract;
 using HotelProject.DataAccessLayer.Abstract;
+using HotelProject.DataAccessLayer.EntityFramework;
 using HotelProject.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,11 @@ namespace HotelProject.BusinessLayer.Concrete
             _bookingDal.TDelete(t);
         }
 
+        public int TGetBookingCount()
+        {
+            return _bookingDal.GetBookingCount();
+        }
+
         public Booking TGetByID(int id)
         {
            return _bookingDal.GetByID(id);
@@ -46,6 +52,11 @@ namespace HotelProject.BusinessLayer.Concrete
         public void TInsert(Booking t)
         {
             _bookingDal.TInsert(t);
+        }
+
+        public List<Booking> TLastSixBooking()
+        {
+            return _bookingDal.LastSixBookings();
         }
 
         public void TUpdate(Booking t)

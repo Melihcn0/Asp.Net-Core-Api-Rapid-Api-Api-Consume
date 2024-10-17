@@ -9,55 +9,61 @@ namespace HotelProject.WebApi.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
-        private readonly IBookingService _bookingservice;
+        private readonly IBookingService _bookingService;
 
-        public BookingController(IBookingService bookingservice)
+        public BookingController(IBookingService bookingService)
         {
-            _bookingservice = bookingservice;
+            _bookingService = bookingService;
         }
 
         [HttpGet]
         public IActionResult BookingList()
         {
-            var values = _bookingservice.TGetList();
+            var values = _bookingService.TGetList();
             return Ok(values);
         }
         [HttpPost]
         public IActionResult AddBooking(Booking booking)
         {
-            _bookingservice.TInsert(booking);
+            _bookingService.TInsert(booking);
             return Ok();
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteBooking(int id)
         {
-            var values = _bookingservice.TGetByID(id);
-            _bookingservice.TDelete(values);
+            var values = _bookingService.TGetByID(id);
+            _bookingService.TDelete(values);
             return Ok();
         }
         [HttpPut("UpdateBooking")]
         public IActionResult UpdateBooking(Booking booking)
         {
-            _bookingservice.TUpdate(booking);
+            _bookingService.TUpdate(booking);
             return Ok();
         }
         [HttpGet("{id}")]
         public IActionResult GetBooking(int id)
         {
-            var values = _bookingservice.TGetByID(id);
+            var values = _bookingService.TGetByID(id);
             return Ok(values);
         }
         [HttpPut("aaaaa")]
         public IActionResult aaaaa(Booking booking)
         {
-            _bookingservice.TBookingStatusChangeApproved(booking);
+            _bookingService.TBookingStatusChangeApproved(booking);
             return Ok();
         }
         [HttpPut("bbbbb")]
         public IActionResult bbbbb(int id)
         {
-            _bookingservice.TBookingStatusChangeApproved2(id);
+            _bookingService.TBookingStatusChangeApproved2(id);
             return Ok();
+        }
+        [HttpGet("LastSixBooking")]
+        public IActionResult LastSixBooking()
+        {
+            var values = _bookingService.TLastSixBooking();
+            return Ok(values);
         }
     }
 }
