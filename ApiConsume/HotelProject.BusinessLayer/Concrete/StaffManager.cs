@@ -1,5 +1,6 @@
 ﻿using HotelProject.BusinessLayer.Abstract;
 using HotelProject.DataAccessLayer.Abstract;
+using HotelProject.DataAccessLayer.EntityFramework;
 using HotelProject.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,11 @@ namespace HotelProject.BusinessLayer.Concrete
         public List<Staff> TGetList()
         {
             return _staffDal.TGetList();
+        }
+
+        public int TGetStaffCount()
+        {
+            return _staffDal.GetStaffCount();
         }
 
         public void TInsert(Staff t)
