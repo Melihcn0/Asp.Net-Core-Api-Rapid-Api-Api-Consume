@@ -1,0 +1,16 @@
+﻿using System.Net.Http;
+using System;
+
+namespace HotelProject.WebUI.Dtos.FollowersDto
+{
+    public class ResultLinkedInFollowersDto
+    {
+        public Data data { get; set; }
+        public class Data
+        {
+            public int connection_count { get; set; }
+            public int follower_count { get; set; }
+        }
+
+    }
+}

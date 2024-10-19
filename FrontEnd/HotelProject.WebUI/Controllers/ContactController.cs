@@ -29,36 +29,53 @@ namespace HotelProject.WebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:40699/api/MessageCategory");
-
+            if (responseMessage.IsSuccessStatusCode)
+            {
                 var jsondata = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultMessageCategoryDto>>(jsondata);
-            List<SelectListItem> values2 = (from x in values
-                                             select new SelectListItem
-                                             {
-                                                 Text = x.MessageCategoryName,
-                                                 Value = x.MessageCategoryID.ToString()
-                                             }).ToList();
-                ViewBag.v = values2;
+                List<SelectListItem> values2 = (from x in values
+                                                select new SelectListItem
+                                                {
+                                                    Text = x.MessageCategoryName,
+                                                    Value = x.MessageCategoryID.ToString()
+                                                }).ToList();
+                ViewBag.MessageCategoryID = values2;
+            }
+            else
+            {
 
-                return View();
+            }
+
+            return View();
 
 
         }
         [HttpGet]
         public PartialViewResult SendMessage()
         {
-
             return PartialView();
         }
         [HttpPost]
         public async Task<IActionResult> SendMessage(CreateContactDto createContactDto)
         {
-            createContactDto.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createContactDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            await client.PostAsync("http://localhost:40699/api/Contact", stringContent);
-            return RedirectToAction("Index", "Default");
+            if (ModelState.IsValid)
+            {
+                createContactDto.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
+                var client = _httpClientFactory.CreateClient();
+                var jsonData = JsonConvert.SerializeObject(createContactDto);
+                StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                var responseMessage = await client.PostAsync("http://localhost:40699/api/Contact", stringContent);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index", "Default");
+                }
+                return View();
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
+

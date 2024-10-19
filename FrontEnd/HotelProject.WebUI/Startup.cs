@@ -2,8 +2,12 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using HotelProject.DataAccessLayer.Concrete;
 using HotelProject.EntityLayer.Concrete;
+using HotelProject.WebUI.Dtos.ContactDto;
 using HotelProject.WebUI.Dtos.GuestDto;
+using HotelProject.WebUI.Models.Setting;
+using HotelProject.WebUI.ValidationRules.ContactValidationRules;
 using HotelProject.WebUI.ValidationRules.GuestValidationRules;
+using HotelProject.WebUI.ValidationRules.SettingsValidationRules;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +40,8 @@ namespace HotelProject.WebUI
             services.AddHttpClient(); 
             services.AddTransient<IValidator<CreateGuestDto>, CreateGuestValidator>();
             services.AddTransient<IValidator<UpdateGuestDto>, UpdateGuestValidator>();
+            services.AddTransient<IValidator<CreateContactDto>, CreateContactValidator>();
+            services.AddTransient<IValidator<UserEditViewModel>, UserEditSettingsValidator>();
             services.AddControllersWithViews().AddFluentValidation();
             services.AddAutoMapper(typeof(Startup));
             services.AddMvc(config=>
