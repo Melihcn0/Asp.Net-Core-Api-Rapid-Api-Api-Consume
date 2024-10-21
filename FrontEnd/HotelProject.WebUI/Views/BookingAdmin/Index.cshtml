@@ -31,18 +31,18 @@
                                 <td>@(((DateTime)item.Checkin).ToString("dd-MMMM-yyyy"))</td>
                                 <td>@(((DateTime)item.Checkout).ToString("dd-MMMM-yyyy"))</td>
                     <td>
-                        <span class="badge @(item.Status == "Onaylandı" ? "badge-success" :
-                        item.Status == "Müşteri Aranacak" ? "badge-warning" :
-                        item.Status == "İptal Edildi" ? "badge-danger" :
-                        "badge-primary") px-2">
-                        @item.Status
+                        <span class="badge px-3 @(item.Status == "Onaylandı" ? "btn mb-1 btn-rounded btn-success" :
+                        item.Status == "Müşteri Aranacak" ? "btn mb-1 btn-rounded btn-warning" :
+                        item.Status == "İptal Edildi" ? "btn mb-1 btn-rounded btn-danger" :
+                        "btn btn-primary")">
+                            @item.Status
                         </span>
                     </td>
-                                <td><a href="/BookingAdmin/ApprovedReservation2/@item.BookingID" class="btn btn-outline-primary">Onayla</a></td>
-                                <td><a href="/BookingAdmin/CancelReservation/@item.BookingID" class="btn btn-outline-danger">İptal et</a></td>
-                                <td><a href="/BookingAdmin/WaitReservation/@item.BookingID" class="btn btn-outline-warning">Beklet</a></td>
-                                <td><a href="/BookingAdmin/UpdateBooking/@item.BookingID" class="btn btn-outline-info">Güncelle</a></td>
-                                <td><a href="/BookingAdmin/DetailsBook/@item.BookingID" class="btn btn-outline-dark">Detaylar</a></td>
+                    <td><a href="/BookingAdmin/ApprovedReservation2/@item.BookingID" class="btn mb-1 btn-rounded btn-outline-success">Onayla</a></td>
+                    <td><a href="/BookingAdmin/WaitReservation/@item.BookingID" class="btn mb-1 btn-rounded btn-outline-warning">Beklet</a></td>
+                    <td><a href="/BookingAdmin/CancelReservation/@item.BookingID" class="btn mb-1 btn-rounded btn-outline-danger">İptal et</a></td>
+                    <td><a href="/BookingAdmin/UpdateBooking/@item.BookingID" class="btn mb-1 btn-rounded btn-outline-info">Güncelle</a></td>
+                    <td><a href="/BookingAdmin/DetailsBook/@item.BookingID" class="btn mb-1 btn-rounded btn-outline-dark">Detaylar</a></td>
                             </tr>
                         }
                     </tbody>

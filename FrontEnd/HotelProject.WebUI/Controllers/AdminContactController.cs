@@ -2,6 +2,7 @@
 using HotelProject.WebUI.Dtos.SendMessageDto;
 using HotelProject.WebUI.Models.Staff;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,6 @@ namespace HotelProject.WebUI.Controllers
     public class AdminContactController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private dynamic jsonData;
 
         public AdminContactController(IHttpClientFactory httpClientFactory)
         {
@@ -76,8 +76,25 @@ namespace HotelProject.WebUI.Controllers
 
 
         [HttpGet]
-        public IActionResult AddSendMessage()
+        public async Task<IActionResult> AddSendMessage()
         {
+            var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client2.GetAsync("http://localhost:40699/api/Contact/GetContactCount");
+
+            if (responseMessage2.IsSuccessStatusCode)
+            {
+                var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+                ViewBag.ContactCount = jsonData2;
+            }
+
+            var client3 = _httpClientFactory.CreateClient();
+            var responseMessage3 = await client3.GetAsync("http://localhost:40699/api/SendMessage/GetSendMessageCount");
+
+            if (responseMessage3.IsSuccessStatusCode)
+            {
+                var jsonData3 = await responseMessage3.Content.ReadAsStringAsync();
+                ViewBag.SendMessageCount = jsonData3;
+            }
             return View();
         }
         [HttpPost]
@@ -106,26 +123,67 @@ namespace HotelProject.WebUI.Controllers
         }
         public async Task<IActionResult> MessageDetailsBySendbox(int id)
         {
+            var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client2.GetAsync("http://localhost:40699/api/Contact/GetContactCount");
+
+            if (responseMessage2.IsSuccessStatusCode)
+            {
+                var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+                ViewBag.ContactCount = jsonData2;
+            }
+
+            var client3 = _httpClientFactory.CreateClient();
+            var responseMessage3 = await client3.GetAsync("http://localhost:40699/api/SendMessage/GetSendMessageCount");
+
+            if (responseMessage3.IsSuccessStatusCode)
+            {
+                var jsonData3 = await responseMessage3.Content.ReadAsStringAsync();
+                ViewBag.SendMessageCount = jsonData3;
+            }
+
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"http://localhost:40699/api/SendMessage/{id}");
+
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<GetMessageByIDDto>(jsonData);
                 return View(values);
             }
+
             return View();
         }
+
         public async Task<IActionResult> MessageDetailsByInbox(int id)
         {
+            var client2 = _httpClientFactory.CreateClient();
+            var responseMessage2 = await client2.GetAsync("http://localhost:40699/api/Contact/GetContactCount");
+
+            if (responseMessage2.IsSuccessStatusCode)
+            {
+                var jsonData2 = await responseMessage2.Content.ReadAsStringAsync();
+                ViewBag.ContactCount = jsonData2;
+            }
+
+            var client3 = _httpClientFactory.CreateClient();
+            var responseMessage3 = await client3.GetAsync("http://localhost:40699/api/SendMessage/GetSendMessageCount");
+
+            if (responseMessage3.IsSuccessStatusCode)
+            {
+                var jsonData3 = await responseMessage3.Content.ReadAsStringAsync();
+                ViewBag.SendMessageCount = jsonData3;
+            }
+
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"http://localhost:40699/api/Contact/{id}");
+
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<InboxContactDto>(jsonData);
                 return View(values);
             }
+
             return View();
         }
     }
